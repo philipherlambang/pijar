@@ -5,8 +5,8 @@
     </head>
     <body>
         <div class="container" style="height:auto;">
-            <h1 class="h1">Detail</h1> 
-            <button class="btn btn-default">Edit</button>
+            <h1 class="h1">Detail {{$id}}</h1> 
+            <button class="btn btn-success">Edit</button>
             <button class="btn btn-danger">Delete</button>
         </div>   
     </body>

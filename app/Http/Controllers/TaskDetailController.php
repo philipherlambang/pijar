@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class TaskDetailController extends Controller
 {
-    public function index () {
-        $task = Task::all();
-        // dd($task);
-        return view ('taskDetail');
+    /**
+     * Show the profile for the given user.
+     *
+     * @param  int  $id
+     * @return View
+     */
+    public function show($id) {
+        // $task = Task::all();
+        // dd($id);
+        return view ('taskDetail', ['id' => $id]);
     } 
 }

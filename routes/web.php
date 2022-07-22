@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
 Route::resource('/task', 'TaskController');
-Route::resource('/taskDetail', 'TaskDetailController');
+Route::get('/taskDetail/{id}', 'TaskDetailController@show');
