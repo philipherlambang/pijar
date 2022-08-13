@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
+use App\Models\Card;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index () {
-        $task = Task::all();
-        // dd($task);
-        return view ('welcome', ['Tasks' => $task]);
-    } 
+        $cards = Card::all();
+        return view ('welcome', ["container"=>$cards]);
+    }
 }

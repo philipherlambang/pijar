@@ -14,5 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index');
-Route::resource('/task', 'TaskController');
-Route::get('/taskDetail/{id}', 'TaskDetailController@show');
+Route::post('/card/add', 'CardController@add')->name('cardTitle');
+Route::get('/card/detail', 'CardController@detail');
+
+Route::post('/task/add', 'TaskController@add')->name('taskTitle');
+Route::get('/task/detail/{slug}', 'TaskController@detail')->name('taskDetail');

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
+use App\Models\Card;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-class TaskController extends Controller
+class CardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,11 +25,7 @@ class TaskController extends Controller
      */
     public function add(Request $request)
     {
-        Task::create([
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'card_id' => $request->card_id
-        ]);
+        Card::create(['title'=>$request->title, 'slug'=>Str::slug($request->title)]);
         return redirect()->back();
     }
 
@@ -50,9 +46,9 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function detail($slug)
+    public function detail($id)
     {
-        return view('pages.task-detail', ['slug' => $slug]);
+        //
     }
 
     /**

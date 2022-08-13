@@ -1,38 +1,41 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    </head>
-    <body>
-        <div class=" container rounded-3 border border-2 border-dark my-5 bg-white py-4" style="height:auto;">
-            <div>
-            <h1 class=" h1">To Do List</h1> 
+<html>
+
+<head>
+    <title>Homepage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-md-6 offset-md-3">
+            <form class="my-4" action="{{ route('cardTitle') }}" method="POST">
+
+                @csrf
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Card Title</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="title"
+                        name="title">
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+
             <div class="row">
-                <form action="/task" method="POST">
-                    @csrf
-                    <div class=" col-8">
-                        <input class=" py-3 form-control shadow" placeholder="input your task" type="text" name="task" /> 
+                @foreach ($container as $card)
+                    <div class="card mb-4 col-md-6">
+                        @include('components.card.card-header', ['card' => $card])
+                        @include('components.card.task-list', ['card' => $card])
+                        @include('components.card.card-footer', ['card' => $card])
                     </div>
-                    <div class="col-2">
-                        <input type="submit" class=" mt-2 btn btn-dark" />
-                    </div>
-                </form>
+                    @include('components.modal.modal-add-task', ['card' => $card])
+                @endforeach
             </div>
         </div>
-            <hr>
-        <div class="row rounded bg-white">
-            <div class=" col-12"> 
-            <ul class=" list-group" id="list" style="list-style: none">
-                @foreach ($Tasks as $task)
-                    <li>
-                        <a href="/taskDetail/{{$task->id}}">
-                            {{ $task->nama }}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-            </div> 
-        </div> 
-    </div>   
-    </body>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+</body>
+
 </html>
