@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'AuthController@login');
 Route::group([
 
-    'middleware' => 'auth:api',
+    'middleware' => ['throttle:5,1','auth:api'],
     'prefix' => 'auth'
 
 ], function ($router) {
@@ -30,4 +30,8 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 
+});
+
+Route::middleware(['auth'])->prefix('test')->group(function () {
+    Route::post('logout', 'AuthController@logout');
 });

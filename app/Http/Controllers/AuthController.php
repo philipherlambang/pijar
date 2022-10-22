@@ -23,13 +23,14 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
+        // $log = sjdkfasldf;
         $credentials = request(['email', 'password']);
 
         if (! $token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return $this->respondWithToken($token);
+        return (new ResponseTransformer)->json(200, 'OK', $this->respondWithToken($token));
     }
 
     /**
@@ -74,10 +75,10 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
-        return response()->json([
+        return [
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60
-        ]);
+        ];
     }
 }

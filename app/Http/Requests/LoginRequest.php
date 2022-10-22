@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\EmailVerificationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
@@ -24,7 +25,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            "email" => ["required"],
+            "email" => ["required", new EmailVerificationRule],
             "password" => ['required']
         ];
     }
